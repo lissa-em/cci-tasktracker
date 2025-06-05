@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Single Task Tracker</title>
+  <script src="libraries/p5.min.js"></script> 
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+ <u> <h1>Task Tracker</h1></u>
+
+
+
+  <!-- Task Input Form -->
+  <div class="taskinput-container" id="task1">
+    <h2>Task Input:</h2>
+    <label for="taskInput1">Task Description:</label>
+    <input id="taskInput1" type="text" placeholder="Enter task description" />
+
+    <label>Energy Before:</label>
+    <input id="energyBefore1" type="range" min="0" max="10" value="5" class="accent" />
+    <span id="energyBeforeValue1">5</span>
+
+    <label>Energy After:</label>
+    <input id="energyAfter1" type="range" min="0" max="10" value="5" class="accent" />
+    <span id="energyAfterValue1">5</span>
+
+    <label>Pain Level:</label>
+    <input id="PainLevel" type="range" min="0" max="10" value="5" class="accent" />
+    <span id="PainLevel">5</span>
+
+    <label for="symptomInput1">Symptoms:</label>
+    <input id="symptomInput1" type="text" placeholder="Describe a symptom" />
+    <button id="addSymptomBtn">Add Symptom</button>
+    <ul id="symptomList1"></ul>
+
+<h4>Did you sleep well?</h4>
+<label style="font-weight: normal;">
+  <input type="checkbox" id="SleepYes" name="Sleep">
+  Yes
+</label>
+<label style="font-weight: normal;">
+  <input type="checkbox" id="SleepNo" name="Sleep">
+  No
+</label>
+
+<h4>Did you eat well?</h4>
+<label style="font-weight: normal;">
+  <input type="checkbox" id="EatYes" name="Eat">
+  Yes 
+</label>
+<label style="font-weight: normal;"></label>
+  <input type="checkbox" id="EatNo" name="Eat">
+  No
+</label>
+
+<h4>Did you drink enough?</h4>
+<label style="font-weight: normal;"> </label>
+  <input type="checkbox" id="DrinkYes" name="Drink">
+  Yes
+</label>
+<label style="font-weight: normal;">
+  <input type="checkbox" id="DrinkNo" name="Drink">
+  No
+</label>
+
+    <label for="WeatherData">What is the weather like?</label><br>
+    <select name="Weather" id="WeatherData" class="weatherbox">
+      <option value="Select">Select Weather</option>
+      <option value="Hot">Hot</option>
+      <option value="Warm">Warm</option>
+      <option value="Cool">Cool</option>
+      <option value="Cold">Cold</option>
+      <option value="Rainy">Rainy</option>
+      <option value="Snowy">Snowy</option>
+      <option value="Windy">Windy</option>
+    </select><br><br>
+
+    <button id="saveTaskBtn">Save Task</button>
+    <button id="clearTaskBtn">Clear Task Data</button>
+  </div>
+
+  <!-- Current Tasks Display  -->
+  <div id="CurrentTasksContainer" class="CurrentTask-container"></div>
+
+  <!-- Task History Display -->
+  <div id="TaskHistoryContainer" class="TaskHistory-container">
+    <h2>Task History:</h2>
+    <ul id="taskHistoryList"></ul>
+    <button id="downloadCSVBtn">Download CSV</button>
+  </div>
+
+  <!-- Slider Explinations -->
+<div class="sidenav">
+  <h2>Slider Explanations</h2>
+  <button class="dropdown-btn">Energy Level Key ▼ 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <br>
+    <p> 0 - 1: You need to sleep immediately</p> <br>
+    <p> 2 - 3: You are experiencing fatigue and must lie down and rest (resting can involve reading, going on your phone or watching tv etc)</p> <br>
+    <p> 4 - 5: You are fatigued but can still complete certain tasks slowly with multiple breaks</p> <br>
+    <p> 6 - 7: You can complete tasks at your normal pace with a few breaks</p> <br>
+    <p> 8 - 9: You are feeling energetic / focused and can complete most tasks with no breaks</p> <br>
+    <p> 10: You are experiencing no fatigue and can complete multiple tasks woth no breaks </p> <br>
+    <br>
+
+  </div>
+  <button class="dropdown-btn">Pain Level Key ▼ 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <br>
+    <p> 0 - 1 : You are experiencing no pain. </p> <br>
+    <p> 2 - 3 : You are experiencing pain that can easily be ignored. </p> <br> 
+    <p> 4 - 5 : You are experiencing pain that is noticeable but you can still complete daily tasks. </p>  <br>
+    <p> 6 - 7 : You are experiencing pain that you can't ignore and are having to alter how you complete tasks because of it. </p> <br>
+    <p> 8 - 9 : You are experiencing pain meaning you are unable to complete some or all of your tasks. </p> <br>
+    <p> 10 : You are experiencing severe pain and are unable to complete any tasks including getting food, water and pain medication. </p> <br>
+    <br>
+</div>
+  <button class="dropdown-btn">Sleep Well Key ▼ 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+  
+    <p> Have you slept for at least 7 hours? </p> <br>
+    <p> 0 - 5 hours: No </p> <br>
+    <p> 6 - 7 hours: Yes </p> <br>
+    <p> 8+ hours: Yes </p> <br>
+    <p> You may not need a full 8 hours to feel rested, consider if you feel tired or not</p> <br>
+    <br>
+
+    </div>
+  <button class="dropdown-btn">Eat Well Key ▼ 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+  
+    <p> Consider:  </p> <br>
+    <p> - Have you had at least one full meal before starting this task?</p> <br>
+    <p> - Was that meal balanced?</p> <br>
+    <p> - Do you currently feel full? </p> <br>
+    <p> If the answer to 2 of the above is no, you may not have eaten well today</p> <br>
+    <br>
+    </div>
+  <button class="dropdown-btn">Drink Enough Key ▼ 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <br>
+    <p>  Have you drunk at least 8 glasses of water today?  </p> <br>
+    <p>  0 - 5 glasses: No  </p> <br>
+    <p>  6 - 8 glasses: Yes  </p> <br>
+    <p>  9+ glasses: Yes  </p> <br>
+    <br>
+    </div>
+
+
+  <!-- Canvas -->
+  <script src="sketch.js"></script>
+</body>
+</html>
